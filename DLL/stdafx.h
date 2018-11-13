@@ -15,8 +15,11 @@
 
 // reference additional headers your program requires here
 #include <codecvt>
+#include <experimental/filesystem>
+#include <functional>
 #include <MinHook.h>
 #include <nlohmann/json.hpp>
+#include <psapi.h>
 #include <sstream>
 #include <string>
 #include <unordered_map>

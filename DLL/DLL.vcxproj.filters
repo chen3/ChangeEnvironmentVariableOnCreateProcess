@@ -60,6 +60,9 @@
     <ClInclude Include="ProcessEnvironment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ProcessData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -90,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ProcessEnvironment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

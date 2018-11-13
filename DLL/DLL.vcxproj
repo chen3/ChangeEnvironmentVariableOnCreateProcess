@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="FileAttribute.h" />
     <ClInclude Include="Lazy.hpp" />
+    <ClInclude Include="ProcessData.h" />
     <ClInclude Include="ProcessEnvironment.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringHelper.h" />
@@ -168,6 +169,7 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="FileAttribute.cpp" />
+    <ClCompile Include="ProcessData.cpp" />
     <ClCompile Include="ProcessEnvironment.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
