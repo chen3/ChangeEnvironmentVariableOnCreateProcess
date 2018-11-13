@@ -48,9 +48,6 @@
     <ClInclude Include="Thrid\minhook\src\hde\table64.h">
       <Filter>minhook\hde</Filter>
     </ClInclude>
-    <ClInclude Include="Thrid\minhook\include\MinHook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StringHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -61,9 +58,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ProcessEnvironment.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Thrid\nlohmann-json\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
