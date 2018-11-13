@@ -60,6 +60,12 @@
     <ClInclude Include="FileAttribute.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ProcessEnvironment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Thrid\nlohmann-json\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -87,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FileAttribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessEnvironment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
