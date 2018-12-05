@@ -1,5 +1,12 @@
 #pragma once
 
+namespace boost {
+    namespace interprocess {
+        class windows_shared_memory;
+        class mapped_region;
+    }
+}
+
 namespace mx404 {
     namespace ChangeEnvironmentVariableOnCreateProcess {
         namespace SharedMemory {
