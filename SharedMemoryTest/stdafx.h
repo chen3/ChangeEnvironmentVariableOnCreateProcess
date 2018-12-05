@@ -7,7 +7,14 @@
 
 #include "targetver.h"
 
+#include <Windows.h>
+
 // Headers for CppUnitTest
 #include "CppUnitTest.h"
 
-// TODO: reference additional headers your program requires here
+#include <unordered_map>
+#include <SharedMemory\MemData.h>
+#include <SharedMemory\IEnvChange.hpp>
+#include <SharedMemory\SharedMemoryClientManager.h>
+#include <SharedMemory\SharedMemoryServerManager.h>
+#include <string>
