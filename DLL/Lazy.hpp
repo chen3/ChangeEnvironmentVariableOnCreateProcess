@@ -1,4 +1,5 @@
 // https://blog.csdn.net/gx864102252/article/details/79418152
+#pragma once
 #include "stdafx.h"
 
 namespace ChangeEnvironmentVariableOnCreateProcess {
