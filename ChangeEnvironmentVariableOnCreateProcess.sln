@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SharedMemoryLib", "SharedMemoryLib\SharedMemoryLib.vcxproj", "{25EF6DE1-0480-4D10-9714-AA81015173DD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MinHookLib", "MinHookLib\MinHookLib.vcxproj", "{17B704B7-D963-47E0-B7F5-6B270C142BFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,16 @@ Global
 		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Release|x64.Build.0 = Release|x64
 		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Release|x86.ActiveCfg = Release|Win32
 		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Release|x86.Build.0 = Release|Win32
+		{17B704B7-D963-47E0-B7F5-6B270C142BFC}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{17B704B7-D963-47E0-B7F5-6B270C142BFC}.Debug|x64.ActiveCfg = Debug|x64
+		{17B704B7-D963-47E0-B7F5-6B270C142BFC}.Debug|x64.Build.0 = Debug|x64
+		{17B704B7-D963-47E0-B7F5-6B270C142BFC}.Debug|x86.ActiveCfg = Debug|Win32
+		{17B704B7-D963-47E0-B7F5-6B270C142BFC}.Debug|x86.Build.0 = Debug|Win32
+		{17B704B7-D963-47E0-B7F5-6B270C142BFC}.Release|Any CPU.ActiveCfg = Release|Win32
+		{17B704B7-D963-47E0-B7F5-6B270C142BFC}.Release|x64.ActiveCfg = Release|x64
+		{17B704B7-D963-47E0-B7F5-6B270C142BFC}.Release|x64.Build.0 = Release|x64
+		{17B704B7-D963-47E0-B7F5-6B270C142BFC}.Release|x86.ActiveCfg = Release|Win32
+		{17B704B7-D963-47E0-B7F5-6B270C142BFC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
