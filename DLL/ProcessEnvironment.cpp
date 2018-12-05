@@ -2,17 +2,17 @@
 #include "ProcessEnvironment.h"
 #include "StringHelper.h"
 
-using ChangeEnvironmentVariableOnCreateProcess::ProcessEnvironment;
+using mx404::ChangeEnvironmentVariableOnCreateProcess::IProcessEnvironment;
+using mx404::ChangeEnvironmentVariableOnCreateProcess::ProcessEnvironment;
 using std::shared_ptr;
 using std::wstringstream;
-using std::move;
 using std::vector;
 using std::wstring;
 using std::unordered_map;
 using ChangeEnvironmentVariableOnCreateProcess::wstringToUtf8;
 
 ProcessEnvironment::ProcessEnvironment(const ProcessEnvironment && env) noexcept
-    : env(move(env.env))
+    : env(std::move(env.env))
 {
 }
 
@@ -64,7 +64,12 @@ bool ProcessEnvironment::contains(const wstring & key) const noexcept
     return env.find(key) != env.end();
 }
 
-nlohmann::json ChangeEnvironmentVariableOnCreateProcess::ProcessEnvironment::toJson() const noexcept
+std::shared_ptr<IProcessEnvironment> ProcessEnvironment::clone() const
+{
+    return std::static_pointer_cast<IProcessEnvironment>(std::make_shared<ProcessEnvironment>(*this));
+}
+
+nlohmann::json ProcessEnvironment::toJson() const noexcept
 {
     nlohmann::json json;
     for (auto pair : env) {
@@ -74,6 +79,11 @@ nlohmann::json ChangeEnvironmentVariableOnCreateProcess::ProcessEnvironment::toJ
 }
 
 ProcessEnvironment::ProcessEnvironment() noexcept
+{
+}
+
+ProcessEnvironment::ProcessEnvironment(const ProcessEnvironment & penv) noexcept
+    : env(penv.env)
 {
 }
 

@@ -11,9 +11,6 @@
 // Windows Header Files
 #include <windows.h>
 
-
-
-// reference additional headers your program requires here
 #include <codecvt>
 #include <experimental/filesystem>
 #include <functional>
@@ -24,3 +21,6 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+
+#include <IProcessEnvironment.hpp>
+#include <SharedMemory\SharedMemoryClientManager.h>
