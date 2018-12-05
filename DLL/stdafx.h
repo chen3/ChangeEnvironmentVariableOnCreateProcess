@@ -23,4 +23,5 @@
 #include <vector>
 
 #include <IProcessEnvironment.hpp>
+#include <SharedMemory\IEnvChange.hpp>
 #include <SharedMemory\SharedMemoryClientManager.h>

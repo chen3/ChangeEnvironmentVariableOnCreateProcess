@@ -1,7 +1,18 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
 
+#include "ProcessData.h"
+#include "ProcessEnvironment.h"
+
 namespace {
+    using ChangeEnvironmentVariableOnCreateProcess::ProcessData;
+    using mx404::ChangeEnvironmentVariableOnCreateProcess::IProcessEnvironment;
+    using mx404::ChangeEnvironmentVariableOnCreateProcess::ProcessEnvironment;
+    using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::IEnvChange;
+    using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::SharedMemoryClientManager;
+
+    SharedMemoryClientManager clientManager("ChangeEnvironmentVariableOnCreateProcess");
+
     decltype(&::CreateProcessW) fpCreateProcess = nullptr;
     BOOL detourCreateProcess(
         _In_opt_     LPCWSTR lpApplicationName,
@@ -14,9 +25,29 @@ namespace {
         _In_opt_     LPCWSTR lpCurrentDirectory,
         _In_         LPSTARTUPINFOW lpStartupInfo,
         _Out_        LPPROCESS_INFORMATION lpProcessInformation) {
+
+        std::shared_ptr<IEnvChange> envChange;
+        if (!clientManager.contain()) {
+            return fpCreateProcess(lpApplicationName, lpCommandLine, lpProcessAttributes,
+                lpThreadAttributes, bInheritHandles, dwCreationFlags,
+                lpEnvironment, lpCurrentDirectory, lpStartupInfo,
+                lpProcessInformation);
+            envChange = clientManager.getEnvChange(ProcessData::currentProcessMainMuduleFilePath.value());
+            if (!envChange) {
+                return fpCreateProcess(lpApplicationName, lpCommandLine, lpProcessAttributes,
+                    lpThreadAttributes, bInheritHandles, dwCreationFlags,
+                    lpEnvironment, lpCurrentDirectory, lpStartupInfo,
+                    lpProcessInformation);
+            }
+        }
+
+        std::shared_ptr<wchar_t> envPtr(static_cast<wchar_t*>(lpEnvironment), [](wchar_t*) {});
+        std::shared_ptr<ProcessEnvironment> pEnv = std::make_shared<ProcessEnvironment>(ProcessEnvironment::getFormProcessString(envPtr));
+        std::shared_ptr<IProcessEnvironment> newEnv = envChange->change(pEnv);
+
         return fpCreateProcess(lpApplicationName, lpCommandLine, lpProcessAttributes,
             lpThreadAttributes, bInheritHandles, dwCreationFlags,
-            lpEnvironment, lpCurrentDirectory, lpStartupInfo,
+            static_cast<LPVOID>(&(newEnv->toWinAPINeedString())), lpCurrentDirectory, lpStartupInfo,
             lpProcessInformation);
     };
 
