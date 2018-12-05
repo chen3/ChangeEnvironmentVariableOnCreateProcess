@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Lazy.hpp"
+
 namespace ChangeEnvironmentVariableOnCreateProcess {
     class ProcessData
     {
