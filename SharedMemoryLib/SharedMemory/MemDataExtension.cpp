@@ -20,10 +20,11 @@ unsigned int MemDataExtension::getSugeestMemoryByteSize(std::shared_ptr<MemData>
             unsigned int size = i * fiveM;  // 每次增加5兆
             SharedMemoryObject obj(random_string(), size);  // 可以将随机字符串改为使用uuid
             obj.updateData(data);
-            const int hypothesisAligmentByte = 8;
-            unsigned int needSize =
-                (obj.getUsedMemory() / hypothesisAligmentByte + obj.getNumUniqueObjects()) * hypothesisAligmentByte;
-            return needSize * 2;
+            const int hypothesisAligmentByte = 8;   // 返回建议大小为8的倍数，方便对齐
+            // 建议大小为实际使用大小的两倍
+            return static_cast<unsigned int>(
+                std::ceil(obj.getUsedMemory() * 2.0 / hypothesisAligmentByte)
+                    * hypothesisAligmentByte);
         }
         catch (boost::interprocess::bad_alloc&) {   // 内存不足则继续增加
             continue;

@@ -20,6 +20,7 @@
 #include <boost/interprocess/mapped_region.hpp>
 #include <boost/interprocess/windows_shared_memory.hpp> 
 #undef BOOST_DATE_TIME_NO_LIB
+#include <cmath>
 #include <cstdint>
 #include <cwctype>
 #include <exception>
