@@ -72,19 +72,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)ThridLib\min-boost\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)ThridLib\min-boost\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)ThridLib\min-boost\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)ThridLib\min-boost\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)ThridLib\min-boost\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)ThridLib\min-boost\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)ThridLib\min-boost\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)ThridLib\min-boost\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -151,10 +151,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="IProcessEnvironment.hpp" />
+    <ClInclude Include="SharedMemory\EnvChange.h" />
+    <ClInclude Include="SharedMemory\IEnvChange.hpp" />
+    <ClInclude Include="SharedMemory\MemData.h" />
+    <ClInclude Include="SharedMemory\MemDataExtension.h" />
+    <ClInclude Include="SharedMemory\MemDataTooLargeException.hpp" />
+    <ClInclude Include="SharedMemory\SharedMemoryClientManager.h" />
+    <ClInclude Include="SharedMemory\SharedMemoryClientManagerException.hpp" />
+    <ClInclude Include="SharedMemory\SharedMemoryException.hpp" />
+    <ClInclude Include="SharedMemory\SharedMemoryObject.h" />
+    <ClInclude Include="SharedMemory\SharedMemoryObjectCreateException.hpp" />
+    <ClInclude Include="SharedMemory\SharedMemoryObjectException.hpp" />
+    <ClInclude Include="SharedMemory\SharedMemoryServerManager.h" />
+    <ClInclude Include="SharedMemory\SharedMemoryServerManagerException.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SharedMemory\EnvChange.cpp" />
+    <ClCompile Include="SharedMemory\MemData.cpp" />
+    <ClCompile Include="SharedMemory\MemDataExtension.cpp" />
+    <ClCompile Include="SharedMemory\SharedMemoryClientManager.cpp" />
+    <ClCompile Include="SharedMemory\SharedMemoryObject.cpp" />
+    <ClCompile Include="SharedMemory\SharedMemoryServerManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\SharedMemory">
+      <UniqueIdentifier>{f12b0859-086b-4fc8-bc75-66ff42afd6de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SharedMemory">
+      <UniqueIdentifier>{bb923931-4635-4273-a7a5-5209202515bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -21,10 +27,70 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SharedMemory\EnvChange.h">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory\IEnvChange.hpp">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory\MemData.h">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory\MemDataExtension.h">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory\MemDataTooLargeException.hpp">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory\SharedMemoryClientManager.h">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory\SharedMemoryClientManagerException.hpp">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory\SharedMemoryException.hpp">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory\SharedMemoryObject.h">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory\SharedMemoryObjectCreateException.hpp">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory\SharedMemoryObjectException.hpp">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory\SharedMemoryServerManager.h">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory\SharedMemoryServerManagerException.hpp">
+      <Filter>Header Files\SharedMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="IProcessEnvironment.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedMemory\EnvChange.cpp">
+      <Filter>Source Files\SharedMemory</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedMemory\MemData.cpp">
+      <Filter>Source Files\SharedMemory</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedMemory\MemDataExtension.cpp">
+      <Filter>Source Files\SharedMemory</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedMemory\SharedMemoryClientManager.cpp">
+      <Filter>Source Files\SharedMemory</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedMemory\SharedMemoryObject.cpp">
+      <Filter>Source Files\SharedMemory</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedMemory\SharedMemoryServerManager.cpp">
+      <Filter>Source Files\SharedMemory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
