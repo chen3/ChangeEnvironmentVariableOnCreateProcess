@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DLL", "DLL\DLL.vcxproj", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{DD92300E-5AE7-44B2-A857-4DA82B9093DD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SharedMemoryLib", "SharedMemoryLib\SharedMemoryLib.vcxproj", "{25EF6DE1-0480-4D10-9714-AA81015173DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,16 @@ Global
 		{DD92300E-5AE7-44B2-A857-4DA82B9093DD}.Release|x64.Build.0 = Release|Any CPU
 		{DD92300E-5AE7-44B2-A857-4DA82B9093DD}.Release|x86.ActiveCfg = Release|Any CPU
 		{DD92300E-5AE7-44B2-A857-4DA82B9093DD}.Release|x86.Build.0 = Release|Any CPU
+		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Debug|x64.ActiveCfg = Debug|x64
+		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Debug|x64.Build.0 = Debug|x64
+		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Debug|x86.ActiveCfg = Debug|Win32
+		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Debug|x86.Build.0 = Debug|Win32
+		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Release|Any CPU.ActiveCfg = Release|Win32
+		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Release|x64.ActiveCfg = Release|x64
+		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Release|x64.Build.0 = Release|x64
+		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Release|x86.ActiveCfg = Release|Win32
+		{25EF6DE1-0480-4D10-9714-AA81015173DD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
