@@ -70,7 +70,9 @@ namespace Core
                         };
                         var result = await DialogHost.Show(view) as bool?;
                         if (result == true && !string.IsNullOrWhiteSpace(model.Text1) 
-                            && !string.IsNullOrWhiteSpace(model.Text2))
+                            && !string.IsNullOrWhiteSpace(model.Text2)
+                            && !model.Text1.ContainsAny(";", "=")
+                            && !model.Text2.ContainsAny(";", "="))
                         {
                             path.Envs.Add(new Env
                             {
@@ -158,6 +160,21 @@ namespace Core
         public void Execute(object parameter)
         {
             _execute(parameter);
+        }
+    }
+
+    internal static class StringExtends
+    {
+        internal static bool ContainsAny(this string s, params string[] values)
+        {
+            foreach (string value in values)
+            {
+                if (s.Contains(value))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
