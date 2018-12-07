@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Core
 {
@@ -22,7 +12,29 @@ namespace Core
     {
         public MainWindow()
         {
+            this.DataContext = _treeViewModel;
             InitializeComponent();
+        }
+
+        private readonly TreeViewModel _treeViewModel = new TreeViewModel();
+        
+        private void MyTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            _treeViewModel.SelectedItem = e.NewValue;
+        }
+
+        private void MyTreeView_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (MyTreeView.SelectedItem == null || e.ChangedButton != MouseButton.Left)
+            {
+                return;
+            }
+            if (!(MyTreeView.ItemContainerGenerator.ContainerFromIndex(0) is TreeViewItem treeViewItem))
+            {
+                return;
+            }
+            treeViewItem.IsSelected = true;
+            treeViewItem.IsSelected = false;
         }
     }
 }

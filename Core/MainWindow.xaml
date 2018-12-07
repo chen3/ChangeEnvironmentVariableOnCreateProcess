@@ -5,8 +5,93 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Core"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="MainWindow" Height="450" Width="600" d:DataContext="{d:DesignData TreeViewModel}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <!--<RowDefinition Height="auto" />-->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"
+                                  materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                  Grid.Row="0" Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Style="{DynamicResource MaterialDesignToolButton}">
+                    <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                </Button>
+                <TextBox Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="搜索" 
+                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                         MinWidth="200" VerticalAlignment="Center" />
+            </Grid>
+        </materialDesign:ColorZone>
+
+        <materialDesign:DialogHost Grid.Row="1" Grid.Column="0" />
+
+        <TreeView x:Name="MyTreeView" Grid.Row="1" Grid.Column="0" MinWidth="220" MouseDown="MyTreeView_OnMouseDown"
+                SelectedItemChanged="MyTreeView_SelectedItemChanged" ItemsSource="{Binding Paths}">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type local:Path}"
+                                            ItemsSource="{Binding Envs}">
+                    <TextBlock Text="{Binding PathFullName}" />
+                </HierarchicalDataTemplate>
+                <DataTemplate DataType="{x:Type local:Env}">
+                    <!--<TextBlock Text="{Binding Name}" Margin="3 2"
+                                ToolTip="{Binding Value}"/>-->
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0}={1}">
+                                <Binding Path="Name"/>
+                                <Binding Path="Value"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+
+        <materialDesign:PopupBox Grid.Row="1" Grid.Column="0"
+                                 Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                 PlacementMode="LeftAndAlignMiddles" UnfurlOrientation="Horizontal"
+                                 ToolTip="Manage items" Margin="0 0 10 10"
+                                 HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal" d:DataContext="{d:DesignData TreeViewModel}">
+                <Button ToolTip="Add an item" Command="{Binding AddCommand}" 
+                        CommandParameter="{Binding ElementName=MyTreeView, Path=SelectedItem}">
+                    <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                          Stretch="Uniform" Width="15" Height="15"
+                          Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                </Button>
+                <Button ToolTip="Remove selected item" Command="{Binding RemoveSelectedItemCommand}" 
+                        CommandParameter="{Binding ElementName=MyTreeView, Path=SelectedItem}">
+                    <Path Data="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                          Stretch="Uniform" Width="15" Height="15"
+                          Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                </Button>
+            </StackPanel>
+        </materialDesign:PopupBox>
     </Grid>
 </Window>
