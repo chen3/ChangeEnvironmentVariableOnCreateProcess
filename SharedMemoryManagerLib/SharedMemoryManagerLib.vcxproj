@@ -132,11 +132,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="MemData.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SharedMemoryServerManager.h" />
+    <ClInclude Include="SharedMemoryServerManagerException.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="MemData.cpp" />
+    <ClCompile Include="SharedMemoryServerManager.cpp" />
+    <ClCompile Include="SharedMemoryServerManagerException.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
