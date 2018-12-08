@@ -11,7 +11,7 @@ namespace {
     using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::IEnvChange;
     using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::SharedMemoryClientManager;
 
-    SharedMemoryClientManager clientManager("ChangeEnvironmentVariableOnCreateProcess");
+    SharedMemoryClientManager clientManager("MX404ChangeEnvironmentVariableOnCreateProcess");
 
     decltype(&::CreateProcessW) fpCreateProcess = nullptr;
     BOOL detourCreateProcess(
