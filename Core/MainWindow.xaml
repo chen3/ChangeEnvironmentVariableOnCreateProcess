@@ -79,19 +79,20 @@
                                  ToolTip="Manage items" Margin="0 0 10 10"
                                  HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <StackPanel Orientation="Horizontal" d:DataContext="{d:DesignData TreeViewModel}">
-                <Button ToolTip="Add an item" Command="{Binding AddCommand}" 
+                <Button ToolTip="添加" Command="{Binding AddCommand}" 
                         CommandParameter="{Binding ElementName=MyTreeView, Path=SelectedItem}">
-                    <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                          Stretch="Uniform" Width="15" Height="15"
-                          Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                    <materialDesign:PackIcon Kind="Add"/>
                 </Button>
-                <Button ToolTip="Remove selected item" Command="{Binding RemoveSelectedItemCommand}" 
+                <Button ToolTip="删除所选项" Command="{Binding RemoveSelectedItemCommand}" 
                         CommandParameter="{Binding ElementName=MyTreeView, Path=SelectedItem}">
-                    <Path Data="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
-                          Stretch="Uniform" Width="15" Height="15"
-                          Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                    <materialDesign:PackIcon Kind="Delete"/>
+                </Button>
+                <Button ToolTip="更新数据" Click="Sync_OnClick">
+                    <materialDesign:PackIcon Kind="Sync"/>
                 </Button>
             </StackPanel>
         </materialDesign:PopupBox>
+        <materialDesign:Snackbar x:Name="Snackbar" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
+                                 MessageQueue="{materialDesign:MessageQueue}" />
     </Grid>
 </Window>
