@@ -11,11 +11,16 @@ using UnmanagerSharedMemoryServerManager = mx404::ChangeEnvironmentVariableOnCre
 using msclr::interop::marshal_as;
 
 SharedMemoryServerManager::SharedMemoryServerManager(System::String^ name)
-    try : manager(new UnmanagerSharedMemoryServerManager(marshal_as<std::string>(name)))
 {
-}
-catch (std::exception& ex) {
-    throw gcnew SharedMemoryServerManagerException(gcnew System::String(ex.what()));
+    try {
+        if (System::String::IsNullOrWhiteSpace(name)) {
+            throw gcnew System::ArgumentException("must not be null or empty", "name");
+        }
+        manager = new UnmanagerSharedMemoryServerManager(marshal_as<std::string>(name));
+    }
+    catch (std::exception& ex) {
+        throw gcnew SharedMemoryServerManagerException(gcnew System::String(ex.what()));
+    }
 }
 
 SharedMemoryServerManager::~SharedMemoryServerManager() 
