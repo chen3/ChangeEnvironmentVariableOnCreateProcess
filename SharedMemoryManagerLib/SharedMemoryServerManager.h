@@ -9,7 +9,7 @@ namespace mx404 {
 
         namespace SharedMemoryManager {
 
-            ref struct MemData;
+            ref class MemData;
 
             public ref class SharedMemoryServerManager
             {
