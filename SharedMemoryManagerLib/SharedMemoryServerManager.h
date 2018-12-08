@@ -11,7 +11,7 @@ namespace mx404 {
 
             ref struct MemData;
 
-            ref class SharedMemoryServerManager
+            public ref class SharedMemoryServerManager
             {
             public:
                 SharedMemoryServerManager(System::String^ name);
