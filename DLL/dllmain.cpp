@@ -26,23 +26,29 @@ namespace {
         _In_         LPSTARTUPINFOW lpStartupInfo,
         _Out_        LPPROCESS_INFORMATION lpProcessInformation) {
 
-        std::shared_ptr<IEnvChange> envChange;
         if (!clientManager.contain()) {
             return fpCreateProcess(lpApplicationName, lpCommandLine, lpProcessAttributes,
                 lpThreadAttributes, bInheritHandles, dwCreationFlags,
                 lpEnvironment, lpCurrentDirectory, lpStartupInfo,
                 lpProcessInformation);
-            envChange = clientManager.getEnvChange(ProcessData::currentProcessMainMuduleFilePath.value());
-            if (!envChange) {
-                return fpCreateProcess(lpApplicationName, lpCommandLine, lpProcessAttributes,
-                    lpThreadAttributes, bInheritHandles, dwCreationFlags,
-                    lpEnvironment, lpCurrentDirectory, lpStartupInfo,
-                    lpProcessInformation);
-            }
         }
 
-        std::shared_ptr<wchar_t> envPtr(static_cast<wchar_t*>(lpEnvironment), [](wchar_t*) {});
-        std::shared_ptr<ProcessEnvironment> pEnv = std::make_shared<ProcessEnvironment>(ProcessEnvironment::getFormProcessString(envPtr));
+        std::shared_ptr<IEnvChange> envChange = clientManager.getEnvChange(ProcessData::currentProcessMainMuduleFilePath.value());
+        if (envChange == nullptr) {
+            return fpCreateProcess(lpApplicationName, lpCommandLine, lpProcessAttributes,
+                lpThreadAttributes, bInheritHandles, dwCreationFlags,
+                lpEnvironment, lpCurrentDirectory, lpStartupInfo,
+                lpProcessInformation);
+        }
+
+        std::shared_ptr<ProcessEnvironment> pEnv;
+        if (lpEnvironment != nullptr) {
+            std::shared_ptr<wchar_t> envPtr(static_cast<wchar_t*>(lpEnvironment), [](wchar_t*) {});
+            pEnv = std::make_shared<ProcessEnvironment>(ProcessEnvironment::getFormProcessString(envPtr));
+        }
+        else {
+            pEnv = std::make_shared<ProcessEnvironment>(ProcessEnvironment::getFormCurrentProcess());
+        }
         std::shared_ptr<IProcessEnvironment> newEnv = envChange->change(pEnv);
 
         return fpCreateProcess(lpApplicationName, lpCommandLine, lpProcessAttributes,
