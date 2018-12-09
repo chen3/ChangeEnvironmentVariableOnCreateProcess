@@ -35,7 +35,7 @@ SharedMemoryObject::SharedMemoryObject(const char * name)
 {
 }
 
-SharedMemoryObject::SharedMemoryObject(const std::string name, unsigned int size)
+SharedMemoryObject::SharedMemoryObject(const std::string name, uint32_t size)
     try : name(name)
     , memory(std::make_shared<managed_windows_shared_memory>(boost::interprocess::create_only, name.c_str(), size))
 {
@@ -78,9 +78,14 @@ managed_windows_shared_memory::size_type SharedMemoryObject::getNumUniqueObjects
     return memory->get_num_unique_objects();
 }
 
-unsigned int SharedMemoryObject::getUsedMemory() const
+uint32_t SharedMemoryObject::getUsedMemory() const
 {
+#ifdef WIN32
     return memory->get_size() - memory->get_free_memory();
+#endif // WIN32
+    auto result = memory->get_size() - memory->get_free_memory();
+    assert(result <= UINT32_MAX);
+    return static_cast<uint32_t>(result);
 }
 
 std::shared_ptr<SharedMemoryObject::String> SharedMemoryObject::getString(const std::wstring & str)

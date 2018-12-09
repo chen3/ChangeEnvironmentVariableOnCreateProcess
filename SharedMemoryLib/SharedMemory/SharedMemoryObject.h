@@ -22,7 +22,7 @@ namespace mx404 {
                 using ObjectType = std::unordered_map<String, MapType, boost::hash<String>, std::equal_to<String>, Alloc<std::pair<const String, MapType>>>;
 
                 std::weak_ptr<ObjectType> getObj();
-                unsigned int getUsedMemory() const;
+                uint32_t getUsedMemory() const;
 
                 std::shared_ptr<String> getString(const std::wstring& str);
             private:
@@ -33,7 +33,7 @@ namespace mx404 {
 
                 friend class SharedMemoryServerManager;
                 friend class MemDataExtension;
-                SharedMemoryObject(const std::string name, unsigned int size);
+                SharedMemoryObject(const std::string name, uint32_t size);
                 void updateData(std::shared_ptr<MemData> data);
                 boost::interprocess::managed_windows_shared_memory::size_type getNumUniqueObjects();
             };

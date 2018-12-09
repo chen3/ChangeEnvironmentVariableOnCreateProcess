@@ -11,7 +11,7 @@ using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::MemDataTooL
 using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::SharedMemoryObject;
 using boost::interprocess::managed_windows_shared_memory;
 
-unsigned int MemDataExtension::getSugeestMemoryByteSize(std::shared_ptr<MemData> data)
+uint32_t MemDataExtension::getSugeestMemoryByteSize(std::shared_ptr<MemData> data)
 {
     const int maxCount = 6; // 最多使用内存为 maxCount * 5M
     const boost::ulong_long_type fiveM = 5 * 1024 * 1024;
@@ -20,9 +20,9 @@ unsigned int MemDataExtension::getSugeestMemoryByteSize(std::shared_ptr<MemData>
             unsigned int size = i * fiveM;  // 每次增加5兆
             SharedMemoryObject obj(random_string(), size);  // 可以将随机字符串改为使用uuid
             obj.updateData(data);
-            const int hypothesisAligmentByte = 8;   // 返回建议大小为8的倍数，方便对齐
+            const uint32_t hypothesisAligmentByte = 8;   // 返回建议大小为8的倍数，方便对齐
             // 建议大小为实际使用大小的两倍
-            return static_cast<unsigned int>(
+            return static_cast<uint32_t>(
                 std::ceil(obj.getUsedMemory() * 2.0 / hypothesisAligmentByte)
                     * hypothesisAligmentByte);
         }

@@ -9,7 +9,7 @@ namespace mx404 {
             class MemDataExtension abstract sealed
             {
             public:
-                static unsigned int getSugeestMemoryByteSize(std::shared_ptr<MemData> data);
+                static uint32_t getSugeestMemoryByteSize(std::shared_ptr<MemData> data);
 
             private:
                 // https://stackoverflow.com/questions/47977829/generate-a-random-string-in-c11
