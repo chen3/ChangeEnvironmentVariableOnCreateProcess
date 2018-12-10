@@ -90,5 +90,5 @@ uint32_t SharedMemoryObject::getUsedMemory() const
 
 std::shared_ptr<SharedMemoryObject::String> SharedMemoryObject::getString(const std::wstring & str)
 {
-    return std::make_shared<SharedMemoryObject::String>(str.c_str(), memory->get_segment_manager());
+    return std::make_shared<SharedMemoryObject::String>(str.c_str(), str.length(), memory->get_segment_manager());
 }
