@@ -20,9 +20,9 @@ std::shared_ptr<IProcessEnvironment> EnvChange::change(const std::shared_ptr<IPr
     }
     std::shared_ptr<IProcessEnvironment> newEnv = env->clone();
     for (std::pair<const SharedMemoryObject::String, SharedMemoryObject::String> pair : *map) {
-        std::wstring name = tolower(pair.first.data());
-        std::wstring value = pair.second.data();
-        if (name == std::wstring(L"path")) {
+        std::wstring name(pair.first.cbegin(), pair.second.cend());
+        std::wstring value(pair.second.cbegin(), pair.second.cend());
+        if (tolower(name) == std::wstring(L"path")) {
             if (value[value.length() - 1] != L';') {
                 value += ';';
             }
