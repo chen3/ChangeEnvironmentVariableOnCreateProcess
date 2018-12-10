@@ -23,6 +23,9 @@ std::shared_ptr<IProcessEnvironment> EnvChange::change(const std::shared_ptr<IPr
         std::wstring name(pair.first.cbegin(), pair.second.cend());
         std::wstring value(pair.second.cbegin(), pair.second.cend());
         if (tolower(name) == std::wstring(L"path")) {
+            if (value.empty()) {
+                continue;
+            }
             if (value[value.length() - 1] != L';') {
                 value += ';';
             }
