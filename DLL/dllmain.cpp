@@ -50,10 +50,15 @@ namespace {
             pEnv = std::make_shared<ProcessEnvironment>(ProcessEnvironment::getFormCurrentProcess());
         }
         std::shared_ptr<IProcessEnvironment> newEnv = envChange->change(pEnv);
-
+        const std::wstring envStr = newEnv->toWinAPINeedString();
+        const size_t envStrLength = envStr.length();
+        wchar_t* s = new wchar_t[envStrLength];
+        for (size_t i = 0; i < envStrLength; ++i) {
+            s[i] = envStr[i];
+        }
         return fpCreateProcess(lpApplicationName, lpCommandLine, lpProcessAttributes,
-            lpThreadAttributes, bInheritHandles, dwCreationFlags,
-            static_cast<LPVOID>(&(newEnv->toWinAPINeedString())), lpCurrentDirectory, lpStartupInfo,
+            lpThreadAttributes, bInheritHandles, dwCreationFlags | CREATE_UNICODE_ENVIRONMENT,
+            static_cast<LPVOID>(s), lpCurrentDirectory, lpStartupInfo,
             lpProcessInformation);
     };
 
