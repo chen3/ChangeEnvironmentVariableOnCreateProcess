@@ -90,7 +90,8 @@ std::shared_ptr<IEnvChange> SharedMemoryClientManager::getEnvChange(const std::w
         return std::shared_ptr<IEnvChange>();
     }
     std::shared_ptr<SharedMemoryObject::ObjectType> obj = subMem->getObj().lock();
-    SharedMemoryObject::ObjectType::iterator i = obj->find(*(subMem->getString(processFullPath)));
+    std::shared_ptr<SharedMemoryObject::String> p = subMem->getString(processFullPath);
+    SharedMemoryObject::ObjectType::iterator i = obj->find(*p);
     if (i == obj->cend()) {
         return std::shared_ptr<IEnvChange>();
     }
