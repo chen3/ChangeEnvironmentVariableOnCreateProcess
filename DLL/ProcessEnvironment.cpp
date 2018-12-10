@@ -43,9 +43,9 @@ wstring ProcessEnvironment::toWinAPINeedString() const noexcept
 {
     wstringstream s;
     for (auto pair : env) {
-        s << pair.first << '=' << pair.second << '\0';
+        s << pair.first << L'=' << pair.second << L'\0';
     }
-    s << '\0';
+    s << L'\0';
     return s.str();
 }
 
