@@ -18,8 +18,8 @@ namespace mx404 {
                 template<class T>
                 using Alloc = boost::interprocess::allocator<T, boost::interprocess::managed_windows_shared_memory::segment_manager>;
                 using String = boost::interprocess::basic_string<wchar_t, std::char_traits<wchar_t>, Alloc<wchar_t>>;
-                using MapType = std::unordered_map<String, String, boost::hash<String>, std::equal_to<String>, Alloc<std::pair<const String, String>>>;
-                using ObjectType = std::unordered_map<String, MapType, boost::hash<String>, std::equal_to<String>, Alloc<std::pair<const String, MapType>>>;
+                using MapType = boost::interprocess::map<String, String, std::less<String>, Alloc<std::pair<const String, String>>>;
+                using ObjectType = boost::interprocess::map<String, MapType, std::less<String>, Alloc<std::pair<const String, MapType>>>;
 
                 std::weak_ptr<ObjectType> getObj();
                 uint32_t getUsedMemory() const;
