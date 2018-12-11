@@ -1,7 +1,7 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
 
-#include "PathHelper.hpp"
+#include "PathHelper.h"
 #include "ProcessData.h"
 #include "ProcessEnvironment.h"
 

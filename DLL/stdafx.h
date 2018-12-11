@@ -18,6 +18,7 @@
 #include <nlohmann/json.hpp>
 #include <psapi.h>
 #include <sstream>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <vector>

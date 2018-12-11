@@ -21,9 +21,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StringHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Lazy.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -36,7 +33,7 @@
     <ClInclude Include="ProcessData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PathHelper.hpp">
+    <ClInclude Include="PathHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,9 +44,6 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StringHelper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FileAttribute.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -57,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ProcessData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PathHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

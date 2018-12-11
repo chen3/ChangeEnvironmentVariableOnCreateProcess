@@ -154,16 +154,16 @@
   <ItemGroup>
     <ClInclude Include="FileAttribute.h" />
     <ClInclude Include="Lazy.hpp" />
-    <ClInclude Include="PathHelper.hpp" />
+    <ClInclude Include="PathHelper.h" />
     <ClInclude Include="ProcessData.h" />
     <ClInclude Include="ProcessEnvironment.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="StringHelper.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="FileAttribute.cpp" />
+    <ClCompile Include="PathHelper.cpp" />
     <ClCompile Include="ProcessData.cpp" />
     <ClCompile Include="ProcessEnvironment.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -172,7 +172,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="StringHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MinHookLib\MinHookLib.vcxproj">
