@@ -27,7 +27,7 @@ namespace {
         _In_opt_     LPCWSTR lpCurrentDirectory,
         _In_         LPSTARTUPINFOW lpStartupInfo,
         _Out_        LPPROCESS_INFORMATION lpProcessInformation) {
-        void* newEnv = nullptr;
+        std::wstring envStr;
         do {
             try {
                 if (!clientManager.contain()) {
@@ -52,22 +52,16 @@ namespace {
                 }
 
                 std::shared_ptr<IProcessEnvironment> newPEnv = envChange->change(pEnv);
-                const std::wstring envStr = newPEnv->toWinAPINeedString();
-                const size_t envStrLength = envStr.length();
-                wchar_t* s = new wchar_t[envStrLength];
-                for (size_t i = 0; i < envStrLength; ++i) {
-                    s[i] = envStr[i];
-                }
-                newEnv = static_cast<void*>(s);
+                envStr = newPEnv->toWinAPINeedString();
             }
             catch (...) {
-                newEnv = nullptr;
+                envStr.clear();
             }
         } while (false);
         return fpCreateProcess(lpApplicationName, lpCommandLine, lpProcessAttributes,
                 lpThreadAttributes, bInheritHandles, 
-                newEnv == nullptr ? dwCreationFlags : dwCreationFlags | CREATE_UNICODE_ENVIRONMENT,
-                newEnv == nullptr ? lpEnvironment : newEnv,
+                envStr.empty() ? dwCreationFlags : dwCreationFlags | CREATE_UNICODE_ENVIRONMENT,
+                envStr.empty() ? lpEnvironment : static_cast<void*>(const_cast<wchar_t*>(envStr.c_str())),
                 lpCurrentDirectory, lpStartupInfo, lpProcessInformation);
     };
 
