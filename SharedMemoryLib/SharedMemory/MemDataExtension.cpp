@@ -4,11 +4,13 @@
 #include "MemData.h"
 #include "MemDataTooLargeException.hpp"
 #include "SharedMemoryObject.h"
+#include "..\Util\StringHelper.h"
 
 using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::MemData;
 using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::MemDataExtension;
 using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::MemDataTooLargeException;
 using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::SharedMemoryObject;
+using mx404::Util::random_string;
 using boost::interprocess::managed_windows_shared_memory;
 
 uint32_t MemDataExtension::getSugeestMemoryByteSize(std::shared_ptr<MemData> data)
@@ -37,16 +39,4 @@ uint32_t MemDataExtension::getSugeestMemoryByteSize(std::shared_ptr<MemData> dat
     auto byteSize = maxCount * fiveM;
     BOOST_THROW_EXCEPTION(MemDataTooLargeException()
         << MemDataTooLargeException::ExceptionInfoString("MemData greate than " + std::to_string(byteSize) + " byte"));
-}
-
-std::string mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::MemDataExtension::random_string()
-{
-    std::string str("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-
-    std::random_device rd;
-    std::mt19937 generator(rd());
-
-    std::shuffle(str.begin(), str.end(), generator);
-
-    return str.substr(0, 32);    // assumes 32 < number of characters in str
 }

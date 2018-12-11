@@ -19,6 +19,12 @@
     <Filter Include="Source Files\SharedMemory">
       <UniqueIdentifier>{bb923931-4635-4273-a7a5-5209202515bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Util">
+      <UniqueIdentifier>{50dc0bcd-c381-4536-b65c-e7d844103c5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Util">
+      <UniqueIdentifier>{a3ae8a8d-cd03-407f-b4e0-5e9bc7fa678d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -69,6 +75,9 @@
     <ClInclude Include="IProcessEnvironment.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Util\StringHelper.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -91,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="SharedMemory\SharedMemoryServerManager.cpp">
       <Filter>Source Files\SharedMemory</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\StringHelper.cpp">
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

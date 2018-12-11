@@ -10,10 +10,6 @@ namespace mx404 {
             {
             public:
                 static uint32_t getSugeestMemoryByteSize(std::shared_ptr<MemData> data);
-
-            private:
-                // https://stackoverflow.com/questions/47977829/generate-a-random-string-in-c11
-                static std::string random_string();
             };
         }
     }
