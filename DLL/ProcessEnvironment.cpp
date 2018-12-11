@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "ProcessEnvironment.h"
-#include "StringHelper.h"
 
 using mx404::ChangeEnvironmentVariableOnCreateProcess::IProcessEnvironment;
 using mx404::ChangeEnvironmentVariableOnCreateProcess::ProcessEnvironment;
@@ -9,7 +8,6 @@ using std::wstringstream;
 using std::vector;
 using std::wstring;
 using std::unordered_map;
-using ChangeEnvironmentVariableOnCreateProcess::wstringToUtf8;
 
 ProcessEnvironment::ProcessEnvironment(const ProcessEnvironment && env) noexcept
     : env(std::move(env.env))
@@ -67,15 +65,6 @@ bool ProcessEnvironment::contains(const wstring & key) const noexcept
 std::shared_ptr<IProcessEnvironment> ProcessEnvironment::clone() const
 {
     return std::static_pointer_cast<IProcessEnvironment>(std::make_shared<ProcessEnvironment>(*this));
-}
-
-nlohmann::json ProcessEnvironment::toJson() const noexcept
-{
-    nlohmann::json json;
-    for (auto pair : env) {
-        json[wstringToUtf8(pair.first)] = wstringToUtf8(pair.second);
-    }
-    return json;
 }
 
 ProcessEnvironment::ProcessEnvironment() noexcept

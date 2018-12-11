@@ -15,7 +15,6 @@ namespace mx404 {
             virtual std::wstring& operator [] (const std::wstring& key) noexcept override;
             virtual bool contains(const std::wstring& key) const noexcept override;
             virtual std::shared_ptr<IProcessEnvironment> clone() const override;
-            nlohmann::json toJson() const noexcept;
 
         private:
             std::unordered_map<std::wstring, std::wstring> env;
