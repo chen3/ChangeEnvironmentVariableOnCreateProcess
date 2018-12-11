@@ -29,35 +29,40 @@ namespace {
         _Out_        LPPROCESS_INFORMATION lpProcessInformation) {
         void* newEnv = nullptr;
         do {
-            if (!clientManager.contain()) {
-                break;
-            }
-            std::wstring targetFileFullPath = PathHelper::getApplicationFullPath(lpApplicationName, lpCommandLine);
-            if (targetFileFullPath.empty()) {
-                break;
-            }
-            std::shared_ptr<IEnvChange> envChange = clientManager.getEnvChange(targetFileFullPath);
-            if (envChange == nullptr) {
-                break;
-            }
+            try {
+                if (!clientManager.contain()) {
+                    break;
+                }
+                std::wstring targetFileFullPath = PathHelper::getApplicationFullPath(lpApplicationName, lpCommandLine);
+                if (targetFileFullPath.empty()) {
+                    break;
+                }
+                std::shared_ptr<IEnvChange> envChange = clientManager.getEnvChange(targetFileFullPath);
+                if (envChange == nullptr) {
+                    break;
+                }
 
-            std::shared_ptr<ProcessEnvironment> pEnv;
-            if (lpEnvironment != nullptr) {
-                std::shared_ptr<wchar_t> envPtr(static_cast<wchar_t*>(lpEnvironment), [](wchar_t*) {});
-                pEnv = std::make_shared<ProcessEnvironment>(ProcessEnvironment::getFormProcessString(envPtr));
-            }
-            else {
-                pEnv = std::make_shared<ProcessEnvironment>(ProcessEnvironment::getFormCurrentProcess());
-            }
+                std::shared_ptr<ProcessEnvironment> pEnv;
+                if (lpEnvironment != nullptr) {
+                    std::shared_ptr<wchar_t> envPtr(static_cast<wchar_t*>(lpEnvironment), [](wchar_t*) {});
+                    pEnv = std::make_shared<ProcessEnvironment>(ProcessEnvironment::getFormProcessString(envPtr));
+                }
+                else {
+                    pEnv = std::make_shared<ProcessEnvironment>(ProcessEnvironment::getFormCurrentProcess());
+                }
 
-            std::shared_ptr<IProcessEnvironment> newPEnv = envChange->change(pEnv);
-            const std::wstring envStr = newPEnv->toWinAPINeedString();
-            const size_t envStrLength = envStr.length();
-            wchar_t* s = new wchar_t[envStrLength];
-            for (size_t i = 0; i < envStrLength; ++i) {
-                s[i] = envStr[i];
+                std::shared_ptr<IProcessEnvironment> newPEnv = envChange->change(pEnv);
+                const std::wstring envStr = newPEnv->toWinAPINeedString();
+                const size_t envStrLength = envStr.length();
+                wchar_t* s = new wchar_t[envStrLength];
+                for (size_t i = 0; i < envStrLength; ++i) {
+                    s[i] = envStr[i];
+                }
+                newEnv = static_cast<void*>(s);
             }
-            newEnv = static_cast<void*>(s);
+            catch (...) {
+                newEnv = nullptr;
+            }
         } while (false);
         return fpCreateProcess(lpApplicationName, lpCommandLine, lpProcessAttributes,
                 lpThreadAttributes, bInheritHandles, 
