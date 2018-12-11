@@ -1,6 +1,7 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
 
+#include "PathHelper.hpp"
 #include "ProcessData.h"
 #include "ProcessEnvironment.h"
 
@@ -10,6 +11,7 @@ namespace {
     using mx404::ChangeEnvironmentVariableOnCreateProcess::ProcessEnvironment;
     using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::IEnvChange;
     using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::SharedMemoryClientManager;
+    namespace PathHelper = mx404::PathHelper;
 
     SharedMemoryClientManager clientManager("MX404ChangeEnvironmentVariableOnCreateProcess");
 
@@ -30,7 +32,11 @@ namespace {
             if (!clientManager.contain()) {
                 break;
             }
-            std::shared_ptr<IEnvChange> envChange;
+            std::wstring targetFileFullPath = PathHelper::getApplicationFullPath(lpApplicationName, lpCommandLine);
+            if (targetFileFullPath.empty()) {
+                break;
+            }
+            std::shared_ptr<IEnvChange> envChange = clientManager.getEnvChange(targetFileFullPath);
             if (envChange == nullptr) {
                 break;
             }
