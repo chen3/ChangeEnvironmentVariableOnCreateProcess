@@ -8,6 +8,7 @@
 #include "SharedMemoryObject.h"
 #include "SharedMemoryObjectCreateException.hpp"
 #include "SharedMemoryObjectException.hpp"
+#include "..\Util\StringHelper.h"
 
 using boost::interprocess::windows_shared_memory;
 using boost::interprocess::managed_windows_shared_memory;
@@ -20,8 +21,21 @@ using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::SharedMemor
 using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::SharedMemoryObjectException;
 using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::IEnvChange;
 using mx404::ChangeEnvironmentVariableOnCreateProcess::SharedMemory::MemData;
+using mx404::Util::random_string;
 template<class T>
-using BoostAlloc = boost::interprocess::allocator<T, boost::interprocess::managed_windows_shared_memory::segment_manager>;
+using BoostAlloc = boost::interprocess::allocator<T, managed_windows_shared_memory::segment_manager>;
+
+namespace {
+    // TODO 多线程安全
+    std::unique_ptr<managed_windows_shared_memory> m;
+    std::shared_ptr<SharedMemoryObject::String> ConvertString(const std::wstring& s) {
+        if (m == nullptr) {
+            m = std::make_unique<managed_windows_shared_memory>(
+                        boost::interprocess::create_only, random_string().c_str(), 10240);
+        }
+        return std::make_shared<SharedMemoryObject::String>(s.cbegin(), s.cend(), m->get_segment_manager());
+    }
+}
 
 SharedMemoryClientManager::SharedMemoryClientManager(const std::string& name)
     try : name(name)
@@ -90,7 +104,7 @@ std::shared_ptr<IEnvChange> SharedMemoryClientManager::getEnvChange(const std::w
         return std::shared_ptr<IEnvChange>();
     }
     std::shared_ptr<SharedMemoryObject::ObjectType> obj = subMem->getObj().lock();
-    std::shared_ptr<SharedMemoryObject::String> p = subMem->getString(processFullPath);
+    std::shared_ptr<SharedMemoryObject::String> p = ConvertString(processFullPath);
     SharedMemoryObject::ObjectType::iterator i = obj->find(*p);
     if (i == obj->cend()) {
         return std::shared_ptr<IEnvChange>();
