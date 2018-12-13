@@ -37,6 +37,11 @@ catch (boost::interprocess::interprocess_exception&) {
         << boost::errinfo_nested_exception(boost::current_exception()));
 }
 
+SharedMemoryServerManager::~SharedMemoryServerManager()
+{
+    setLatestVersion(0);
+}
+
 inline void SharedMemoryServerManager::setLatestVersion(uint32_t value)
 {
     *latestShdMemVersion = value;

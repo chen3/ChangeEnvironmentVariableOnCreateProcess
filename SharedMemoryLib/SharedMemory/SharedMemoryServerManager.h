@@ -19,6 +19,7 @@ namespace mx404 {
             {
             public:
                 SharedMemoryServerManager(const std::string& name);
+                ~SharedMemoryServerManager();
 
                 inline uint32_t getLatestVersion() const;
 

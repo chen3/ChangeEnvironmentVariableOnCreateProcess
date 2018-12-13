@@ -46,6 +46,11 @@ namespace Core
             DataContext = _treeViewModel;
         }
 
+        ~MainWindow()
+        {
+            _sharedMemoryServer.Dispose();
+        }
+
         private readonly TreeViewModel _treeViewModel;
         
         private void MyTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
