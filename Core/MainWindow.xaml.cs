@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Reflection;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,6 +22,7 @@ namespace Core
     {
         public MainWindow()
         {
+            SingleInstanceEnsure();
             InitializeComponent();
             TreeViewModel model = null;
             try
@@ -122,6 +125,16 @@ namespace Core
             using (var stringReader = new StringReader(xml))
             {
                 return (TreeViewModel)new XmlSerializer(typeof(TreeViewModel)).Deserialize(stringReader);
+            }
+        }
+
+        [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
+        private static void SingleInstanceEnsure()
+        {
+            new Mutex(true, Assembly.GetExecutingAssembly().GetName().Name, out bool createdNew);
+            if (!createdNew)
+            {
+                Environment.Exit(-1);
             }
         }
     }
